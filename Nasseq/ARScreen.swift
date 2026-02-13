@@ -13,15 +13,19 @@ struct ARScreen: View {
             ARViewContainer(arManager: arManager, modelLibrary: modelLibrary)
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                Text(modelLibrary.selectedModel?.name ?? "Select a model")
-                    .padding(8)
-                    .background(Color.black.opacity(0.5))
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+            VStack(spacing: 15) {
+                // Selected Item Name
+                if let selected = modelLibrary.selectedModel {
+                    Text(selected.name)
+                        .font(.headline)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(.thinMaterial)
+                        .cornerRadius(20)
+                }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
+                    HStack(spacing: 15) {
                         ForEach(modelLibrary.availableModels) { model in
                             Button {
                                 modelLibrary.selectedModel = model
@@ -30,23 +34,33 @@ struct ARScreen: View {
                                 VStack {
                                     Image(systemName: "cube.fill")
                                         .resizable()
-                                        .frame(width: 40, height: 40)
-                                        .foregroundColor(modelLibrary.selectedModel?.id == model.id ? .green : .white)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(modelLibrary.selectedModel?.id == model.id ? .white : .nasseqTeal)
                                     
                                     Text(model.name)
-                                        .font(.caption)
-                                        .foregroundColor(.white)
+                                        .font(.caption2.bold())
+                                        .foregroundColor(modelLibrary.selectedModel?.id == model.id ? .white : .primary)
                                 }
-                                .padding()
-                                .background(Color.black.opacity(0.3))
-                                .cornerRadius(12)
+                                .padding(12)
+                                .background {
+                                    if modelLibrary.selectedModel?.id == model.id {
+                                        Color.nasseqTeal
+                                    } else {
+                                        Rectangle()
+                                            .fill(.thinMaterial)
+                                    }
+                                }
+                                .cornerRadius(16)
+                                .shadow(radius: 2)
                             }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
                 }
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
         }
         .onAppear {
             if let initialName = initialModelName {
