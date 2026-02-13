@@ -10,9 +10,22 @@
 		E29B30E12F3F83210094AF0D /* Nasseq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nasseq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E2B2FCD32F3F959B005D42F0 /* Exceptions for "Nasseq" folder in "Nasseq" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E29B30E02F3F83210094AF0D /* Nasseq */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E29B30E32F3F83210094AF0D /* Nasseq */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E2B2FCD32F3F959B005D42F0 /* Exceptions for "Nasseq" folder in "Nasseq" target */,
+			);
 			path = Nasseq;
 			sourceTree = "<group>";
 		};
@@ -33,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				E29B30E32F3F83210094AF0D /* Nasseq */,
+				E29B30F72F3F85F40094AF0D /* Frameworks */,
 				E29B30E22F3F83210094AF0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +57,13 @@
 				E29B30E12F3F83210094AF0D /* Nasseq.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E29B30F72F3F85F40094AF0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +275,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Nasseq/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "نحتاج الكاميرا";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -298,6 +321,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Nasseq/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "نحتاج الكاميرا";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
