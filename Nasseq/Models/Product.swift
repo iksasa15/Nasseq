@@ -31,7 +31,7 @@ enum ProductCategory: String, Codable, CaseIterable {
 }
 
 // MARK: - Product Model
-struct Product: Identifiable, Codable, Hashable {
+struct Product: Identifiable, Hashable {
     let id: UUID
     let name: String
     let nameArabic: String
@@ -62,6 +62,47 @@ struct Product: Identifiable, Codable, Hashable {
         self.realWorldScale = realWorldScale
         self.description = description
         self.descriptionArabic = descriptionArabic
+    }
+}
+
+// MARK: - Codable Implementation
+extension Product: Codable {
+    enum CodingKeys: String, CodingKey {
+        case id, name, nameArabic, category, modelFilename, thumbnailName, realWorldScale, description, descriptionArabic
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Handle id as either String or UUID
+        if let idString = try? container.decode(String.self, forKey: .id) {
+            // Try to create UUID from string, or generate new one if invalid
+            self.id = UUID(uuidString: idString) ?? UUID()
+        } else {
+            self.id = try container.decode(UUID.self, forKey: .id)
+        }
+        
+        self.name = try container.decode(String.self, forKey: .name)
+        self.nameArabic = try container.decode(String.self, forKey: .nameArabic)
+        self.category = try container.decode(ProductCategory.self, forKey: .category)
+        self.modelFilename = try container.decode(String.self, forKey: .modelFilename)
+        self.thumbnailName = try? container.decode(String.self, forKey: .thumbnailName)
+        self.realWorldScale = try container.decode(Float.self, forKey: .realWorldScale)
+        self.description = try? container.decode(String.self, forKey: .description)
+        self.descriptionArabic = try? container.decode(String.self, forKey: .descriptionArabic)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(nameArabic, forKey: .nameArabic)
+        try container.encode(category, forKey: .category)
+        try container.encode(modelFilename, forKey: .modelFilename)
+        try container.encodeIfPresent(thumbnailName, forKey: .thumbnailName)
+        try container.encode(realWorldScale, forKey: .realWorldScale)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(descriptionArabic, forKey: .descriptionArabic)
     }
 }
 

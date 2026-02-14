@@ -130,11 +130,43 @@ extension ARManager: ARSessionDelegate {
     }
     
     private func loadAndAttachModel(named name: String, scale: Float, to anchor: AnchorEntity) {
-        // Try to load the model
-        // In a real app, you might want to do this asynchronously
+        print("🔍 Attempting to load model: \(name)")
+        
+        // Try multiple loading methods
+        var modelEntity: ModelEntity?
+        
+        // Method 1: Try loading by name directly
         do {
-            let modelEntity = try Entity.loadModel(named: name)
+            modelEntity = try Entity.loadModel(named: name)
+            print("✅ Successfully loaded model using name: \(name)")
+        } catch {
+            print("⚠️ Method 1 failed: \(error)")
             
+            // Method 2: Try loading with explicit .usdz extension
+            do {
+                modelEntity = try Entity.loadModel(named: "\(name).usdz")
+                print("✅ Successfully loaded model with extension: \(name).usdz")
+            } catch {
+                print("⚠️ Method 2 failed: \(error)")
+                
+                // Method 3: Try loading from bundle explicitly
+                if let url = Bundle.main.url(forResource: name, withExtension: "usdz") {
+                    print("📦 Found file in bundle at: \(url.path)")
+                    do {
+                        modelEntity = try Entity.loadModel(contentsOf: url)
+                        print("✅ Successfully loaded model from URL")
+                    } catch {
+                        print("❌ Method 3 failed: \(error)")
+                    }
+                } else {
+                    print("❌ File not found in bundle: \(name).usdz")
+                    print("📦 Bundle path: \(Bundle.main.bundlePath)")
+                }
+            }
+        }
+        
+        // If we successfully loaded the model
+        if let modelEntity = modelEntity {
             // Apply real-world scale
             modelEntity.scale = SIMD3<Float>(repeating: scale)
             
@@ -143,19 +175,17 @@ extension ARManager: ARSessionDelegate {
             arView.installGestures([.rotation, .scale, .translation], for: modelEntity)
             
             anchor.addChild(modelEntity)
-            
-        } catch {
-            print("Could not load model \(name): \(error). Using fallback.")
-            
-            // Fallback: Blue box with appropriate scale
+        } else {
+            // Fallback: Blue box
+            print("📦 Creating fallback blue box")
             let mesh = MeshResource.generateBox(size: scale)
             let material = SimpleMaterial(color: .blue, isMetallic: true)
-            let modelEntity = ModelEntity(mesh: mesh, materials: [material])
+            let fallbackEntity = ModelEntity(mesh: mesh, materials: [material])
             
-            modelEntity.generateCollisionShapes(recursive: true)
-            arView.installGestures([.rotation, .scale, .translation], for: modelEntity)
+            fallbackEntity.generateCollisionShapes(recursive: true)
+            arView.installGestures([.rotation, .scale, .translation], for: fallbackEntity)
             
-            anchor.addChild(modelEntity)
+            anchor.addChild(fallbackEntity)
         }
     }
 }

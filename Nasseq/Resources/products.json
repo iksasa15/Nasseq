@@ -1,26 +1,48 @@
 {
   "products": [
     {
-      "id": "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
-      "name": "White Ceramic Plate",
-      "nameArabic": "طبق سيراميك أبيض",
-      "category": "plates",
-      "modelFilename": "plate_ceramic_white",
+      "id": "TOY-DRUMMER-001",
+      "name": "Toy Drummer",
+      "nameArabic": "لعبة طبال",
+      "category": "centerpieces",
+      "modelFilename": "toy_drummer",
       "thumbnailName": null,
-      "realWorldScale": 0.27,
-      "description": "Classic white dinner plate, 27cm diameter",
-      "descriptionArabic": "طبق عشاء أبيض كلاسيكي، قطر 27 سم"
+      "realWorldScale": 0.15,
+      "description": "Animated toy drummer figure",
+      "descriptionArabic": "لعبة طبال متحركة"
     },
     {
-      "id": "B2C3D4E5-F6A7-8901-BCDE-F12345678901",
-      "name": "Blue Ceramic Plate",
-      "nameArabic": "طبق سيراميك أزرق",
-      "category": "plates",
-      "modelFilename": "plate_ceramic_blue",
+      "id": "CHAMELEON-001",
+      "name": "Chameleon",
+      "nameArabic": "حرباء",
+      "category": "centerpieces",
+      "modelFilename": "chameleon_anim_mtl_variant",
       "thumbnailName": null,
-      "realWorldScale": 0.27,
-      "description": "Elegant blue ceramic plate",
-      "descriptionArabic": "طبق سيراميك أزرق أنيق"
+      "realWorldScale": 0.20,
+      "description": "Animated chameleon decoration",
+      "descriptionArabic": "حرباء متحركة للزينة"
+    },
+    {
+      "id": "PANCAKES-001",
+      "name": "Pancakes",
+      "nameArabic": "فطائر",
+      "category": "centerpieces",
+      "modelFilename": "pancakes_photogrammetry",
+      "thumbnailName": null,
+      "realWorldScale": 0.15,
+      "description": "Stack of delicious pancakes",
+      "descriptionArabic": "كومة من الفطائر اللذيذة"
+    },
+    {
+      "id": "BASEBALL-GLOVE-001",
+      "name": "Baseball Glove",
+      "nameArabic": "قفاز بيسبول",
+      "category": "centerpieces",
+      "modelFilename": "glove_baseball_mtl_variant",
+      "thumbnailName": null,
+      "realWorldScale": 0.12,
+      "description": "Baseball glove decoration",
+      "descriptionArabic": "قفاز بيسبول للزينة"
     },
     {
       "id": "C3D4E5F6-A7B8-9012-CDEF-123456789012",
