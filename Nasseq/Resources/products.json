@@ -47,13 +47,13 @@
     {
       "id": "C3D4E5F6-A7B8-9012-CDEF-123456789012",
       "name": "Glass Water Cup",
-      "nameArabic": "كوب ماء زجاجي",
-      "category": "cups",
-      "modelFilename": "cup_glass",
+      "nameArabic": "طبق أبيض",
+      "category": "plates",
+      "modelFilename": "plate",
       "thumbnailName": null,
-      "realWorldScale": 0.12,
-      "description": "Clear glass drinking cup, 12cm height",
-      "descriptionArabic": "كوب شرب زجاجي شفاف، ارتفاع 12 سم"
+      "realWorldScale": 0.27,
+      "description": "White ceramic plate",
+      "descriptionArabic": "طبق سيراميك أبيض"
     },
     {
       "id": "D4E5F6A7-B8C9-0123-DEF1-234567890123",
