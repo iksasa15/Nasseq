@@ -48,8 +48,15 @@ class ARManager: NSObject, ObservableObject {
         }
         
         let config = ARWorldTrackingConfiguration()
+        
+        // Enhanced plane detection for tables
         config.planeDetection = [.horizontal]
         config.environmentTexturing = .automatic
+        
+        // Enable scene reconstruction for better surface understanding (iOS 13.4+)
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
+            config.sceneReconstruction = .mesh
+        }
         
         if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
             config.frameSemantics.insert(.personSegmentationWithDepth)
@@ -84,7 +91,7 @@ extension ARManager: ARSessionDelegate {
         arView.addSubview(coachingOverlay)
     }
     
-    func placeObject(named modelName: String) {
+    func placeObject(named modelName: String, scale: Float = 0.1) {
         // 1. Get the center of the screen
         let screenCenter = CGPoint(x: arView.bounds.midX, y: arView.bounds.midY)
         
@@ -94,13 +101,13 @@ extension ARManager: ARSessionDelegate {
         if let result = results.first {
             // Found a plane, place it there
             let anchor = AnchorEntity(raycastResult: result)
-            loadAndAttachModel(named: modelName, to: anchor)
+            loadAndAttachModel(named: modelName, scale: scale, to: anchor)
             arView.scene.addAnchor(anchor)
         } else {
             // 3. If no plane found, place it in front of the camera
             // Create a new anchor 0.5 meters in front of the camera
             let cameraAnchor = AnchorEntity(.camera)
-            loadAndAttachModel(named: modelName, to: cameraAnchor)
+            loadAndAttachModel(named: modelName, scale: scale, to: cameraAnchor)
             
             // Transform it to be 0.5m in front
             // Note: Camera anchor is attached to camera, so (0, 0, -0.5) is 0.5m in front
@@ -116,17 +123,20 @@ extension ARManager: ARSessionDelegate {
                 let transform = simd_mul(cameraTransform, translation)
                 
                 let anchor = AnchorEntity(world: transform)
-                loadAndAttachModel(named: modelName, to: anchor)
+                loadAndAttachModel(named: modelName, scale: scale, to: anchor)
                 arView.scene.addAnchor(anchor)
             }
         }
     }
     
-    private func loadAndAttachModel(named name: String, to anchor: AnchorEntity) {
+    private func loadAndAttachModel(named name: String, scale: Float, to anchor: AnchorEntity) {
         // Try to load the model
         // In a real app, you might want to do this asynchronously
         do {
             let modelEntity = try Entity.loadModel(named: name)
+            
+            // Apply real-world scale
+            modelEntity.scale = SIMD3<Float>(repeating: scale)
             
             // Add collision and interaction
             modelEntity.generateCollisionShapes(recursive: true)
@@ -137,8 +147,8 @@ extension ARManager: ARSessionDelegate {
         } catch {
             print("Could not load model \(name): \(error). Using fallback.")
             
-            // Fallback: Blue box
-            let mesh = MeshResource.generateBox(size: 0.1)
+            // Fallback: Blue box with appropriate scale
+            let mesh = MeshResource.generateBox(size: scale)
             let material = SimpleMaterial(color: .blue, isMetallic: true)
             let modelEntity = ModelEntity(mesh: mesh, materials: [material])
             

@@ -1,0 +1,136 @@
+{
+  "products": [
+    {
+      "id": "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
+      "name": "White Ceramic Plate",
+      "nameArabic": "طبق سيراميك أبيض",
+      "category": "plates",
+      "modelFilename": "plate_ceramic_white",
+      "thumbnailName": null,
+      "realWorldScale": 0.27,
+      "description": "Classic white dinner plate, 27cm diameter",
+      "descriptionArabic": "طبق عشاء أبيض كلاسيكي، قطر 27 سم"
+    },
+    {
+      "id": "B2C3D4E5-F6A7-8901-BCDE-F12345678901",
+      "name": "Blue Ceramic Plate",
+      "nameArabic": "طبق سيراميك أزرق",
+      "category": "plates",
+      "modelFilename": "plate_ceramic_blue",
+      "thumbnailName": null,
+      "realWorldScale": 0.27,
+      "description": "Elegant blue ceramic plate",
+      "descriptionArabic": "طبق سيراميك أزرق أنيق"
+    },
+    {
+      "id": "C3D4E5F6-A7B8-9012-CDEF-123456789012",
+      "name": "Glass Water Cup",
+      "nameArabic": "كوب ماء زجاجي",
+      "category": "cups",
+      "modelFilename": "cup_glass",
+      "thumbnailName": null,
+      "realWorldScale": 0.12,
+      "description": "Clear glass drinking cup, 12cm height",
+      "descriptionArabic": "كوب شرب زجاجي شفاف، ارتفاع 12 سم"
+    },
+    {
+      "id": "D4E5F6A7-B8C9-0123-DEF1-234567890123",
+      "name": "Coffee Mug",
+      "nameArabic": "كوب قهوة",
+      "category": "cups",
+      "modelFilename": "mug_coffee",
+      "thumbnailName": null,
+      "realWorldScale": 0.10,
+      "description": "Ceramic coffee mug",
+      "descriptionArabic": "كوب قهوة سيراميك"
+    },
+    {
+      "id": "E5F6A7B8-C9D0-1234-EF12-345678901234",
+      "name": "Ceramic Salad Bowl",
+      "nameArabic": "وعاء سلطة سيراميك",
+      "category": "bowls",
+      "modelFilename": "bowl_ceramic",
+      "thumbnailName": null,
+      "realWorldScale": 0.20,
+      "description": "Medium ceramic serving bowl, 20cm diameter",
+      "descriptionArabic": "وعاء تقديم سيراميك متوسط، قطر 20 سم"
+    },
+    {
+      "id": "F6A7B8C9-D0E1-2345-F123-456789012345",
+      "name": "Glass Serving Bowl",
+      "nameArabic": "وعاء تقديم زجاجي",
+      "category": "bowls",
+      "modelFilename": "bowl_glass",
+      "thumbnailName": null,
+      "realWorldScale": 0.25,
+      "description": "Large glass serving bowl",
+      "descriptionArabic": "وعاء تقديم زجاجي كبير"
+    },
+    {
+      "id": "A7B8C9D0-E1F2-3456-1234-567890123456",
+      "name": "Flower Vase",
+      "nameArabic": "مزهرية",
+      "category": "centerpieces",
+      "modelFilename": "vase_flower",
+      "thumbnailName": null,
+      "realWorldScale": 0.25,
+      "description": "Decorative flower vase, 25cm height",
+      "descriptionArabic": "مزهرية زهور زخرفية، ارتفاع 25 سم"
+    },
+    {
+      "id": "B8C9D0E1-F2A3-4567-2345-678901234567",
+      "name": "Candle Holder",
+      "nameArabic": "حامل شمعة",
+      "category": "centerpieces",
+      "modelFilename": "candle_holder",
+      "thumbnailName": null,
+      "realWorldScale": 0.15,
+      "description": "Elegant candle holder centerpiece",
+      "descriptionArabic": "حامل شمعة أنيق للزينة"
+    },
+    {
+      "id": "C9D0E1F2-A3B4-5678-3456-789012345678",
+      "name": "Stainless Steel Fork",
+      "nameArabic": "شوكة فولاذية",
+      "category": "cutlery",
+      "modelFilename": "fork_steel",
+      "thumbnailName": null,
+      "realWorldScale": 0.20,
+      "description": "Stainless steel dinner fork",
+      "descriptionArabic": "شوكة عشاء من الفولاذ"
+    },
+    {
+      "id": "D0E1F2A3-B4C5-6789-4567-890123456789",
+      "name": "Stainless Steel Knife",
+      "nameArabic": "سكين فولاذية",
+      "category": "cutlery",
+      "modelFilename": "knife_steel",
+      "thumbnailName": null,
+      "realWorldScale": 0.22,
+      "description": "Stainless steel dinner knife",
+      "descriptionArabic": "سكين عشاء من الفولاذ"
+    },
+    {
+      "id": "E1F2A3B4-C5D6-7890-5678-901234567890",
+      "name": "Teaspoon",
+      "nameArabic": "ملعقة شاي",
+      "category": "cutlery",
+      "modelFilename": "spoon_tea",
+      "thumbnailName": null,
+      "realWorldScale": 0.14,
+      "description": "Small teaspoon",
+      "descriptionArabic": "ملعقة شاي صغيرة"
+    },
+    {
+      "id": "F2A3B4C5-D6E7-8901-6789-012345678901",
+      "name": "Tablespoon",
+      "nameArabic": "ملعقة طعام",
+      "category": "cutlery",
+      "modelFilename": "spoon_table",
+      "thumbnailName": null,
+      "realWorldScale": 0.18,
+      "description": "Large tablespoon",
+      "descriptionArabic": "ملعقة طعام كبيرة"
+    }
+  ]
+}

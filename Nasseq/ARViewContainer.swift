@@ -4,7 +4,7 @@ import ARKit
 
 struct ARViewContainer: UIViewRepresentable {
     @ObservedObject var arManager: ARManager
-    @ObservedObject var modelLibrary: ModelLibrary
+    @Binding var currentProduct: Product?
     
     func makeUIView(context: Context) -> ARView {
         let arView = arManager.arView
@@ -23,7 +23,10 @@ struct ARViewContainer: UIViewRepresentable {
         return arView
     }
     
-    func updateUIView(_ uiView: ARView, context: Context) {}
+    func updateUIView(_ uiView: ARView, context: Context) {
+        // Update coordinator's current product
+        context.coordinator.currentProduct = currentProduct
+    }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -31,9 +34,11 @@ struct ARViewContainer: UIViewRepresentable {
     
     class Coordinator: NSObject {
         var parent: ARViewContainer
+        var currentProduct: Product?
         
         init(parent: ARViewContainer) {
             self.parent = parent
+            self.currentProduct = parent.currentProduct
         }
         
         @objc func handleTap(_ sender: UITapGestureRecognizer) {
@@ -43,40 +48,40 @@ struct ARViewContainer: UIViewRepresentable {
             // Raycast to find a horizontal plane
             let results = arView.raycast(from: location, allowing: .estimatedPlane, alignment: .horizontal)
             
-            if let result = results.first {
-                // Determine which model to place
-                let modelName = parent.modelLibrary.selectedModel?.filename ?? "cup" // Default or selected
-                
-                placeObject(named: modelName, at: result, in: arView)
+            if let result = results.first, let product = currentProduct {
+                placeObject(product: product, at: result, in: arView)
             }
         }
         
-        func placeObject(named modelName: String, at result: ARRaycastResult, in arView: ARView) {
+        func placeObject(product: Product, at result: ARRaycastResult, in arView: ARView) {
             let anchor = AnchorEntity(raycastResult: result)
             
             // Try to load the model
             do {
-                let model = try parent.modelLibrary.loadModel(named: modelName)
+                let modelEntity = try Entity.loadModel(named: product.modelFilename)
+                
+                // Apply real-world scale
+                modelEntity.scale = SIMD3<Float>(repeating: product.realWorldScale)
                 
                 // Enable gestures
-                model.generateCollisionShapes(recursive: true)
-                arView.installGestures([.rotation, .scale], for: model)
+                modelEntity.generateCollisionShapes(recursive: true)
+                arView.installGestures([.rotation, .scale], for: modelEntity)
                 
-                anchor.addChild(model)
+                anchor.addChild(modelEntity)
                 arView.scene.addAnchor(anchor)
                 
             } catch {
-                print("Failed to load model: \(modelName). Using fallback box.")
+                print("Failed to load model: \(product.modelFilename). Using fallback box.")
                 
-                // Fallback: Place a simple box
-                let mesh = MeshResource.generateBox(size: 0.1)
+                // Fallback: Place a simple box with appropriate scale
+                let mesh = MeshResource.generateBox(size: product.realWorldScale)
                 let material = SimpleMaterial(color: .blue, isMetallic: true)
-                let model = ModelEntity(mesh: mesh, materials: [material])
+                let modelEntity = ModelEntity(mesh: mesh, materials: [material])
                 
-                model.generateCollisionShapes(recursive: true)
-                arView.installGestures([.rotation, .scale], for: model)
+                modelEntity.generateCollisionShapes(recursive: true)
+                arView.installGestures([.rotation, .scale], for: modelEntity)
                 
-                anchor.addChild(model)
+                anchor.addChild(modelEntity)
                 arView.scene.addAnchor(anchor)
             }
         }
