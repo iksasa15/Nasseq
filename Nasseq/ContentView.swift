@@ -3,6 +3,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
+            // Home
+            HomeView()
+                .tabItem {
+                    Label("الرئيسية", systemImage: "house.fill")
+                }
+            
             // Browse Products
             ProductGalleryView()
                 .tabItem {

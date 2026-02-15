@@ -42,11 +42,20 @@ struct ProductCardView: View {
                     .multilineTextAlignment(.leading)
                     .environment(\.layoutDirection, .rightToLeft)
                 
-                // Category
-                Text(product.category.displayName)
+                // Product Name (English)
+                Text(product.name)
                     .font(.nasseqSmall)
                     .foregroundColor(.secondary)
-                    .environment(\.layoutDirection, .rightToLeft)
+                    .lineLimit(1)
+                
+                // Description (Arabic) - if available
+                if let descriptionArabic = product.descriptionArabic {
+                    Text(descriptionArabic)
+                        .font(.nasseqSmall)
+                        .foregroundColor(.secondary)
+                        .lineLimit(2)
+                        .environment(\.layoutDirection, .rightToLeft)
+                }
             }
             .padding(Spacing.md)
             .background(Color.nasseqBackground)
