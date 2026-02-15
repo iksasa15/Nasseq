@@ -246,10 +246,7 @@ struct FeatureCard: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: 220)
-            .background(
-                Color.white
-                    .opacity(0.95)
-            )
+            .background(Color.nasseqCardBackground)
             .cornerRadius(CornerRadius.lg)
             .shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 4)
         }

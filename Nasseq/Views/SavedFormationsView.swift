@@ -135,7 +135,7 @@ struct FormationCard: View {
             .foregroundColor(.nasseqTeal)
         }
         .padding(Spacing.md)
-        .background(Color.nasseqBackground)
+        .background(Color.nasseqCardBackground)
         .cornerRadius(CornerRadius.lg)
         .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
         .overlay(

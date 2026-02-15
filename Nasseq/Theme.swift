@@ -6,10 +6,18 @@ extension Color {
     static let nasseqTealLight = Color(red: 120/255, green: 180/255, blue: 180/255)
     static let nasseqTealDark = Color(red: 70/255, green: 120/255, blue: 120/255)
     
-    // Additional palette
+    // Adaptive colors for light/dark mode
     static let nasseqBackground = Color(UIColor.systemBackground)
     static let nasseqSecondaryBackground = Color(UIColor.secondarySystemBackground)
+    static let nasseqTertiaryBackground = Color(UIColor.tertiarySystemBackground)
     static let nasseqAccent = Color.nasseqTeal
+    
+    // Card backgrounds that adapt to color scheme
+    static let nasseqCardBackground = Color(UIColor { traitCollection in
+        traitCollection.userInterfaceStyle == .dark
+            ? UIColor(white: 0.15, alpha: 1.0)
+            : UIColor.white
+    })
 }
 
 // MARK: - Fonts
