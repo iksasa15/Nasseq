@@ -21,16 +21,10 @@ struct ContentView: View {
                     Label("الكاميرا", systemImage: "camera.fill")
                 }
             
-            // Favorites
-            FavoritesView()
+            // Saved (Favorites + Formations)
+            SavedView()
                 .tabItem {
-                    Label("المفضلة", systemImage: "heart.fill")
-                }
-            
-            // Saved Formations
-            SavedFormationsView()
-                .tabItem {
-                    Label("التنسيقات", systemImage: "photo.on.rectangle.angled")
+                    Label("المحفوظات", systemImage: "bookmark.fill")
                 }
         }
         .accentColor(.nasseqTeal)

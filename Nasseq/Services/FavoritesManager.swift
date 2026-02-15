@@ -2,11 +2,13 @@ import Foundation
 import Combine
 
 class FavoritesManager: ObservableObject {
+    static let shared = FavoritesManager()
+    
     @Published var favoriteIds: Set<UUID> = []
     
     private let userDefaultsKey = "nasseq_favorites"
     
-    init() {
+    private init() {
         loadFavorites()
     }
     

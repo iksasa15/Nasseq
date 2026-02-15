@@ -2,12 +2,12 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var catalog = ProductCatalog()
-    @StateObject private var favoritesManager = FavoritesManager()
+    @ObservedObject private var favoritesManager = FavoritesManager.shared
     
     @State private var selectedProduct: Product? = nil
-    @State private var showARView: Bool = false
+    @State private var showARCamera: Bool = false
     @State private var navigateToCatalog: Bool = false
-    @State private var navigateToAR: Bool = false
+    @State private var navigateToProductDetail: Bool = false
     
     private let columns = [
         GridItem(.flexible(), spacing: Spacing.md),
@@ -41,16 +41,16 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $showARView) {
-                if let product = selectedProduct {
-                    ARScreen(selectedProduct: product)
-                }
+            .fullScreenCover(isPresented: $showARCamera) {
+                ARScreen(selectedProduct: nil)
             }
             .navigationDestination(isPresented: $navigateToCatalog) {
                 ProductGalleryView()
             }
-            .navigationDestination(isPresented: $navigateToAR) {
-                ARCameraTab()
+            .navigationDestination(isPresented: $navigateToProductDetail) {
+                if let product = selectedProduct {
+                    ProductDetailView(product: product)
+                }
             }
         }
         .environment(\.layoutDirection, .rightToLeft)
@@ -93,7 +93,8 @@ struct HomeView: View {
             }
             .padding(.vertical, Spacing.xl)
         }
-        .frame(height: 280)
+        .frame(height: 320)
+        .ignoresSafeArea(edges: .top)
         .environment(\.layoutDirection, .rightToLeft)
     }
     
@@ -104,11 +105,11 @@ struct HomeView: View {
             FeatureCard(
                 title: "AR حرب عرض",
                 subtitle: "شاهد على طاولتك",
-                buttonText: "Try AR View",
+                buttonText: "جرب عرض AR",
                 icon: "sparkles",
                 iconColor: Color(red: 120/255, green: 200/255, blue: 180/255),
                 action: {
-                    navigateToAR = true
+                    showARCamera = true
                 }
             )
             
@@ -116,7 +117,7 @@ struct HomeView: View {
             FeatureCard(
                 title: "تصفح الكتالوج",
                 subtitle: "اكتشف أدوات المائدة",
-                buttonText: "Browse Catalog",
+                buttonText: "تصفح الكتالوج",
                 icon: "book.fill",
                 iconColor: Color(red: 120/255, green: 200/255, blue: 180/255),
                 action: {
@@ -175,7 +176,7 @@ struct HomeView: View {
                             },
                             onTap: {
                                 selectedProduct = product
-                                showARView = true
+                                navigateToProductDetail = true
                             }
                         )
                     }
@@ -245,7 +246,10 @@ struct FeatureCard: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: 220)
-            .background(Color.nasseqSecondaryBackground)
+            .background(
+                Color.white
+                    .opacity(0.95)
+            )
             .cornerRadius(CornerRadius.lg)
             .shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 4)
         }

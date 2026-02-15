@@ -7,6 +7,7 @@ struct ARScreen: View {
     @StateObject private var formationManager = FormationManager()
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
     
     // Selected product to place
     var selectedProduct: Product?
@@ -27,7 +28,7 @@ struct ARScreen: View {
                 HStack {
                     // Close button
                     Button {
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: "xmark")
                             .font(.system(size: 18, weight: .semibold))

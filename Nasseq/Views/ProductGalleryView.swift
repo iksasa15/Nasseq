@@ -2,12 +2,12 @@ import SwiftUI
 
 struct ProductGalleryView: View {
     @StateObject private var catalog = ProductCatalog()
-    @StateObject private var favoritesManager = FavoritesManager()
+    @ObservedObject private var favoritesManager = FavoritesManager.shared
     
     @State private var selectedCategory: ProductCategory? = nil
     @State private var searchText: String = ""
     @State private var selectedProduct: Product? = nil
-    @State private var showARView: Bool = false
+    @State private var navigateToProductDetail: Bool = false
     
     private let columns = [
         GridItem(.flexible(), spacing: Spacing.md),
@@ -135,8 +135,8 @@ struct ProductGalleryView: View {
                                         onTap: {
                                             print("🔍 Product tapped: \(product.nameArabic)")
                                             selectedProduct = product
-                                            showARView = true
-                                            print("🔍 showARView set to true")
+                                            navigateToProductDetail = true
+                                            print("🔍 navigateToProductDetail set to true")
                                         }
                                     )
                                 }
@@ -148,9 +148,9 @@ struct ProductGalleryView: View {
             }
             .navigationTitle("نسِّق")
             .navigationBarTitleDisplayMode(.large)
-            .fullScreenCover(isPresented: $showARView) {
+            .navigationDestination(isPresented: $navigateToProductDetail) {
                 if let product = selectedProduct {
-                    ARScreen(selectedProduct: product)
+                    ProductDetailView(product: product)
                 }
             }
         }
