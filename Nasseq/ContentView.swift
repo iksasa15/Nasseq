@@ -21,6 +21,12 @@ struct ContentView: View {
                     Label("الكاميرا", systemImage: "camera.fill")
                 }
             
+            // Textures Management
+            TexturesView()
+                .tabItem {
+                    Label("الخامات", systemImage: "photo.on.rectangle")
+                }
+            
             // Saved (Favorites + Formations)
             SavedView()
                 .tabItem {

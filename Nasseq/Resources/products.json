@@ -153,6 +153,17 @@
       "realWorldScale": 0.18,
       "description": "Large tablespoon",
       "descriptionArabic": "ملعقة طعام كبيرة"
+    },
+    {
+      "id": "TABLEWARE-SET-19",
+      "name": "Tableware Set 19",
+      "nameArabic": "طقم أدوات المائدة 19",
+      "category": "plates",
+      "modelFilename": "tableware set 19 OBJ",
+      "thumbnailName": null,
+      "realWorldScale": 0.30,
+      "description": "Complete tableware set with customizable colors",
+      "descriptionArabic": "طقم أدوات مائدة كامل مع إمكانية تخصيص الألوان"
     }
   ]
 }
