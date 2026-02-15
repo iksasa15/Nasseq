@@ -56,7 +56,6 @@ struct ProductDetailView: View {
                         .background(Color.nasseqTeal.opacity(0.1))
                         .cornerRadius(CornerRadius.md)
                         
-                        // Description
                         if let descriptionArabic = product.descriptionArabic {
                             VStack(alignment: .trailing, spacing: Spacing.sm) {
                                 Text("الوصف")
@@ -71,7 +70,6 @@ struct ProductDetailView: View {
                             .padding(.top, Spacing.md)
                         }
                         
-                        // Product Details
                         VStack(alignment: .trailing, spacing: Spacing.sm) {
                             Text("التفاصيل")
                                 .font(.nasseqHeadline)
@@ -103,7 +101,6 @@ struct ProductDetailView: View {
                 Spacer()
                 
                 HStack(spacing: Spacing.md) {
-                    // Favorite Button
                     Button(action: {
                         favoritesManager.toggleFavorite(product.id)
                     }) {
@@ -116,7 +113,6 @@ struct ProductDetailView: View {
                             .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                     }
                     
-                    // Try AR Button
                     Button(action: {
                         showARView = true
                     }) {
@@ -180,7 +176,6 @@ struct ProductDetailView: View {
     }
 }
 
-// MARK: - Detail Row
 struct DetailRow: View {
     let icon: String
     let label: String

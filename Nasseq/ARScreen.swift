@@ -120,10 +120,6 @@ struct ARScreen: View {
             }
         }
         .onAppear {
-            print("🎥 ARScreen appeared")
-            print("🎥 Selected product: \(selectedProduct?.nameArabic ?? "nil")")
-            
-            // Set initial product if provided
             if let product = selectedProduct {
                 currentProduct = product
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

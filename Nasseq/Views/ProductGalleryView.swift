@@ -17,12 +17,10 @@ struct ProductGalleryView: View {
     var filteredProducts: [Product] {
         var products = catalog.products
         
-        // Filter by category
         if let category = selectedCategory {
             products = products.filter { $0.category == category }
         }
         
-        // Filter by search
         if !searchText.isEmpty {
             products = catalog.search(query: searchText)
         }
@@ -33,11 +31,9 @@ struct ProductGalleryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background
                 Color.nasseqBackground.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    // Search Bar
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
@@ -59,10 +55,8 @@ struct ProductGalleryView: View {
                     .padding(.horizontal, Spacing.md)
                     .padding(.top, Spacing.sm)
                     
-                    // Category Filter
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: Spacing.sm) {
-                            // All categories button
                             CategoryChip(
                                 title: "الكل",
                                 icon: "square.grid.2x2",
@@ -83,7 +77,6 @@ struct ProductGalleryView: View {
                         .padding(.vertical, Spacing.md)
                     }
                     
-                    // Products Grid
                     if catalog.isLoading {
                         Spacer()
                         ProgressView()
@@ -133,10 +126,8 @@ struct ProductGalleryView: View {
                                             favoritesManager.toggleFavorite(product.id)
                                         },
                                         onTap: {
-                                            print("🔍 Product tapped: \(product.nameArabic)")
                                             selectedProduct = product
                                             navigateToProductDetail = true
-                                            print("🔍 navigateToProductDetail set to true")
                                         }
                                     )
                                 }
@@ -158,7 +149,6 @@ struct ProductGalleryView: View {
     }
 }
 
-// MARK: - Category Chip
 struct CategoryChip: View {
     let title: String
     let icon: String

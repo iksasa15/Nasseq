@@ -15,7 +15,6 @@ struct HomeView: View {
     ]
     
     var featuredProducts: [Product] {
-        // Show first 4 products as featured
         Array(catalog.products.prefix(4))
     }
     
@@ -26,15 +25,12 @@ struct HomeView: View {
                 
                 ScrollView {
                     VStack(spacing: 0) {
-                        // Hero Section
                         heroSection
                         
-                        // Feature Cards
                         featureCardsSection
                             .padding(.horizontal, Spacing.md)
                             .padding(.top, Spacing.lg)
                         
-                        // Featured Products
                         featuredProductsSection
                             .padding(.top, Spacing.xl)
                     }
@@ -56,15 +52,10 @@ struct HomeView: View {
         .environment(\.layoutDirection, .rightToLeft)
     }
     
-    // MARK: - Hero Section
     private var heroSection: some View {
         ZStack {
-            // Gradient Background
             LinearGradient(
-                gradient: Gradient(colors: [
-                    Color.nasseqTeal,
-                    Color.nasseqTealDark
-                ]),
+                gradient: Gradient(colors: [Color.nasseqTeal, Color.nasseqTealDark]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -72,17 +63,14 @@ struct HomeView: View {
             VStack(spacing: Spacing.md) {
                 Spacer()
                 
-                // Logo
                 Text("نسِّق")
                     .font(.system(size: 48, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
                 
-                // App Name
                 Text("Nasseq")
                     .font(.nasseqHeadline)
                     .foregroundColor(.white.opacity(0.9))
                 
-                // Tagline
                 Text("رتب طاولة طعامك بشكل مثالي")
                     .font(.nasseqBody)
                     .foregroundColor(.white.opacity(0.85))
@@ -98,39 +86,30 @@ struct HomeView: View {
         .environment(\.layoutDirection, .rightToLeft)
     }
     
-    // MARK: - Feature Cards Section
     private var featureCardsSection: some View {
         HStack(spacing: Spacing.md) {
-            // AR View Card
             FeatureCard(
                 title: "AR حرب عرض",
                 subtitle: "شاهد على طاولتك",
                 buttonText: "جرب عرض AR",
                 icon: "sparkles",
                 iconColor: Color(red: 120/255, green: 200/255, blue: 180/255),
-                action: {
-                    showARCamera = true
-                }
+                action: { showARCamera = true }
             )
             
-            // Browse Catalog Card
             FeatureCard(
                 title: "تصفح الكتالوج",
                 subtitle: "اكتشف أدوات المائدة",
                 buttonText: "تصفح الكتالوج",
                 icon: "book.fill",
                 iconColor: Color(red: 120/255, green: 200/255, blue: 180/255),
-                action: {
-                    navigateToCatalog = true
-                }
+                action: { navigateToCatalog = true }
             )
         }
     }
     
-    // MARK: - Featured Products Section
     private var featuredProductsSection: some View {
         VStack(alignment: .trailing, spacing: Spacing.md) {
-            // Section Header
             HStack {
                 Button(action: {
                     navigateToCatalog = true
@@ -154,8 +133,6 @@ struct HomeView: View {
                 }
             }
             .padding(.horizontal, Spacing.md)
-            
-            // Products Grid
             if catalog.isLoading {
                 ProgressView()
                     .scaleEffect(1.5)
@@ -188,7 +165,6 @@ struct HomeView: View {
     }
 }
 
-// MARK: - Feature Card
 struct FeatureCard: View {
     let title: String
     let subtitle: String
@@ -200,7 +176,6 @@ struct FeatureCard: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: Spacing.md) {
-                // Icon
                 ZStack {
                     Circle()
                         .fill(iconColor.opacity(0.2))
@@ -214,7 +189,6 @@ struct FeatureCard: View {
                 
                 Spacer()
                 
-                // Text Content
                 VStack(spacing: Spacing.xs) {
                     Text(title)
                         .font(.nasseqBody)
@@ -227,8 +201,6 @@ struct FeatureCard: View {
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                 }
-                
-                // Button
                 Text(buttonText)
                     .font(.nasseqCaption)
                     .fontWeight(.medium)
